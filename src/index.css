@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: var(--color-blue-500);
   --color-whitesmoke: var(--color-zinc-50);
@@ -18,20 +20,110 @@
   a {
     @apply cursor-pointer hover:opacity-80 active:opacity-50 transition text-zinc-800;
   }
+
+  ::-webkit-scrollbar {
+    @apply w-2 bg-zinc-50;
+  }
+
+  .dark ::-webkit-scrollbar {
+    @apply bg-zinc-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-clip-padding border-2 border-transparent bg-primary rounded-full cursor-pointer hover:opacity-80;
+  }
+
+  .max {
+    @apply max-w-300 mx-auto w-full;
+  }
+
+  .h1 {
+    @apply text-primary font-black text-2xl;
+  }
+
+  body {
+    @apply dark:bg-zinc-900 dark:text-zinc-300;
+  }
+
+  * {
+    @apply selection:bg-primary selection:text-white dark:selection:text-zinc-300;
+  }
 }
 @keyframes emergeFromTop {
   from {
     transform: translateY(-50px);
     opacity: 0;
+    visibility: hidden;
   }
   to {
     transform: translateY(0);
     opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes emergeFromBottom {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes emergeFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 }
 @layer components {
   .h-fixed {
     animation: emergeFromTop 0.5s ease;
-    @apply fixed top-0 left-0 backdrop-blur-xl opacity-90;
+  }
+
+  nav.nav {
+    animation: emergeFromRight 0.5s ease;
+  }
+
+  .li-wrap {
+    @apply flex-row gap-2 items-center;
+  }
+
+  .li-wrap label {
+    @apply text-zinc-500;
+  }
+
+  .li-wrap button {
+    @apply p-2 rounded flex gap-2 items-center hover:text-primary;
+  }
+
+  .profile-img {
+    @apply transition size-50 border-10 border-zinc-200 rounded-full overflow-hidden hover:border-primary/20 dark:border-zinc-800 dark:hover:border-primary/50;
+  }
+
+  .profile-img:hover img {
+    @apply scale-110 transition;
+  }
+
+  .efb {
+    animation: emergeFromBottom 1s ease;
+  }
+
+  .d3 {
+    animation-delay: 300ms;
+  }
+  .d6 {
+    animation-delay: 600ms;
   }
 }
