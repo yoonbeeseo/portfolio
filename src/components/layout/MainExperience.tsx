@@ -1,50 +1,40 @@
+import { LuLink, LuLink2, LuShare } from "react-icons/lu"
+
 type Props = {
   startedAt: string
   endedAt?: string
   name: string
   features: Array<string>
+  link?: string
 }
 
 const data: Props[] = [
   {
-    startedAt: "2020.10",
-    endedAt: "2022.12",
+    name: "구구팜 - 구구단 외우기",
     features: [
-      "Front-end: React, React-Router, StichesJS(styling)",
-      "Back-end: Nodejs, express, passportjs",
-      "Database: MongoDB",
-      "전역상태관리: Redux",
-      "php-youngcart 에서 리액트 컴포넌트 기반의 MERN 스택으로 마이그레이션",
-      "MAU 300~500명, 서비스 종료까지 누적 매출 8.2억원 달성",
-      "기획/디자인/개발 총괄",
-      "결제 API 연동",
+      "구구단 게임 시각화",
+      "구구단을 즐겁게 배울 수 있음",
+      "구구단의 로직 등을 배울 수 있음",
+      "구구단 외우기에 필요한 반복노래 기제 (직접 부름)",
+      "오디오 음성 인식을 위한 내장 브라우저 사용",
+      "게임 로직 구현을 위해 애씀",
+      "게임 디자인의 미흡한 점이 많음을 느낌",
     ],
-    name: "LMS 인강 사이트",
+    startedAt: "2025.05",
+    link: "https://gugufarm-client-v7mu.vercel.app",
   },
   {
-    startedAt: "2023.01",
+    name: "초급용 리액트 인강",
     features: [
-      "Front-end: Next js, vanilla-extract",
-      "Back-end: Next js app router, next-auth",
-      "Database: MongoDB, firebase",
-      "전역상태관리: Redux Toolkit, ReactConext Api",
-      "학원 필수 서류 관리 프로그램 기획/디자인/개발 총괄",
-      "ReactComponent to pdf, csv 기술 구현",
-      "모바일, 테블릿, 데스크탑 등 모든 기기 반응형 구현",
+      "React in Typescript",
+      "tailwindcss",
+      "CRUD with React hooks",
+      "Input controls with ref",
+      "API 통신 + json-server",
+      "page routing with React router",
+      "상태관리 with React Context Api + Zustand",
     ],
-    name: "학원 서류 관리 프로그램",
-  },
-  {
-    startedAt: "2024.01",
-    features: [
-      "Front-end: Next js, vanilla-extract, React Native",
-      "Back-end: Next js app router, firebase-auth",
-      "Database: MongoDB, firebase",
-      "전역상태관리: Redux Toolkit, ReactConext Api",
-      "학원 업무 솔루션 윤비서 기획/디자인/개발 총괄",
-      "웹 및 안드로이드/IOS에 대응하는 랜딩 페이지 + 크로스 플랫폼 앱 개발",
-    ],
-    name: "학원 관리 플랫폼: 윤비서",
+    startedAt: "2025.04",
   },
   {
     startedAt: "2024.11",
@@ -65,17 +55,44 @@ const data: Props[] = [
     name: "DW아카데미",
   },
   {
-    name: "초급용 리액트 인강 제작",
+    startedAt: "2024.01",
     features: [
-      "React in Typescript",
-      "tailwindcss",
-      "CRUD with React hooks",
-      "Input controls with ref",
-      "API 통신 + json-server",
-      "page routing with React router",
-      "상태관리 with React Context Api + Zustand",
+      "Front-end: Next js, vanilla-extract, React Native",
+      "Back-end: Next js app router, firebase-auth",
+      "Database: MongoDB, firebase",
+      "전역상태관리: Redux Toolkit, ReactConext Api",
+      "학원 업무 솔루션 윤비서 기획/디자인/개발 총괄",
+      "웹 및 안드로이드/IOS에 대응하는 랜딩 페이지 + 크로스 플랫폼 앱 개발",
     ],
-    startedAt: "2025.04",
+    name: "학원 관리 플랫폼: 윤비서",
+  },
+  {
+    startedAt: "2023.01",
+    features: [
+      "Front-end: Next js, vanilla-extract",
+      "Back-end: Next js app router, next-auth",
+      "Database: MongoDB, firebase",
+      "전역상태관리: Redux Toolkit, ReactConext Api",
+      "학원 필수 서류 관리 프로그램 기획/디자인/개발 총괄",
+      "ReactComponent to pdf, csv 기술 구현",
+      "모바일, 테블릿, 데스크탑 등 모든 기기 반응형 구현",
+    ],
+    name: "학원 서류 관리 프로그램",
+  },
+  {
+    startedAt: "2020.10",
+    endedAt: "2022.12",
+    features: [
+      "Front-end: React, React-Router, StichesJS(styling)",
+      "Back-end: Nodejs, express, passportjs",
+      "Database: MongoDB",
+      "전역상태관리: Redux",
+      "php-youngcart 에서 리액트 컴포넌트 기반의 MERN 스택으로 마이그레이션",
+      "MAU 300~500명, 서비스 종료까지 누적 매출 8.2억원 달성",
+      "기획/디자인/개발 총괄",
+      "결제 API 연동",
+    ],
+    name: "LMS 인강 사이트",
   },
 ]
 export default function MainExperience() {
@@ -97,6 +114,24 @@ export default function MainExperience() {
                   <li key={j}>{feature}</li>
                 ))}
               </ul>
+              {project.link && (
+                <div className="flex-row mt-4">
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(project.link!)
+                      if (confirm(`[${project.name}] 주소가 복사되었습니다. 이동하시겠습니까?`)) {
+                        const a = document.createElement("a")
+                        a.href = project.link!
+                        a.target = "_blank"
+                        a.click()
+                      }
+                    }}
+                    className="dark:text-zinc-300 flex gap-2 items-center bg-primary text-white p-2 rounded"
+                  >
+                    <LuLink2 /> {project.name} <LuShare />
+                  </button>
+                </div>
+              )}
             </div>
           </li>
         ))}
