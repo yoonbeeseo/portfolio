@@ -1,4 +1,4 @@
-import { LuLink, LuLink2, LuShare } from "react-icons/lu"
+import { LuLink2, LuShare } from "react-icons/lu"
 
 type Props = {
   startedAt: string
